@@ -40,7 +40,7 @@ const FormSchema = z.object({
     message: "Description must be at least 5 characters.",
   }),
   priority: z.string().min(1, {
-    message: "Priority must be selected.",
+    message: "Priority must be selected!",
   }),
 });
 
