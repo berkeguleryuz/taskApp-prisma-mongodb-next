@@ -9,7 +9,7 @@ export async function createTask(formData: FormData) {
   const priority = formData.get("priority")?.toString();
   const completion = formData.get("completion")?.toString();
 
-  if (!name || !description || !priority || !completion) {
+  if (!name || !description || !priority || completion) {
     console.log("Missing fields");
     return new NextResponse("Missing fields: addTask", { status: 401 });
   }

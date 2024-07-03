@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -57,23 +56,12 @@ const TaskForm = ({ task }: { task?: Task }) => {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
     <div className="p-6">
       <Form {...form}>
         <form
           action={functionAction}
-          onSubmit={form.handleSubmit(onSubmit)}
+          // onSubmit={() => functionAction}
           className="w-2/3 space-y-6">
           <FormField
             control={form.control}

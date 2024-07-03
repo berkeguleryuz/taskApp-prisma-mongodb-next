@@ -1,9 +1,11 @@
 import Box from "@/components/Box";
+import TaskCard from "@/components/TaskCard";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import prisma from "@/lib/db";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="py-6">
       <Box>
@@ -18,7 +20,22 @@ export default function Home() {
             <Button>New Task</Button>
           </Link>
         </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <TaskList />
+        </Suspense>
       </Box>
     </main>
+  );
+}
+
+async function TaskList() {
+  const tasks = await prisma.task.findMany({});
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 border p-2">
+      {tasks.map((task) => (
+        <TaskCard key={task.id} task={task} />
+      ))}
+    </div>
   );
 }
